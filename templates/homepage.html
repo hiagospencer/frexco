@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block title %}
+HomePage
+{% endblock title %}
+
+
+{% block content %}
+
+<div class="container" >
+        
+
+    <main class=" m-auto text-center">
+    
+
+    <h1> Lista de usuários cadastrado</h1>
+    <div class="container text-center">
+      <div class="row">
+        <div class="col">
+          <form class="d-flex" role="search" action="?" method="GET">
+
+
+            <input type="reset" value="Cadastrar usuário" onclick="location.href='{% url 'desafio_tech:cadastro' %}'" class="m-4 btn btn-success">
+
+              <input type="search" value="{{ request.GET.nome }}" class="form-control m-4" name="text_nome" aria-label="search" placeholder="Pesquisar...">
+           
+              <button type="submit" class="btn btn-primary m-4 ">Pesquisar</button>
+        
+              <a href="{% url 'desafio_tech:homepage' %}" class="m-4 btn btn-dark " >Limpar</a>
+          
+          </form>
+
+        </div>
+      </div>
+    </div>
+        <table class="table">
+          
+          <thead>
+            
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Nome</th>
+              <th scope="col">Senha</th>
+              <th scope="col">Data de Nascimento</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for user in object_list %}
+            <tr>
+              <th scope="row">{{user.id}}</th>
+              <td>{{ user.nome }}</td>
+              <td>{{ user.senha }}</td>
+              <td>{{ user.data_nascimento }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+          
+        </table>
+
+        <ul class="pagination justify-content-center">
+
+          {% if page_obj.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page=1">&laquo;Primeira</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous.page_number }}">Anterior</a></li>
+          {% endif %}
+
+          <li class="page-item">
+              <span class="page-link">Página: {{ page_obj.number }}</span>
+          </li>
+
+          {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page.number}}">Próximo</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages}}">Ultima&raquo;</a></li>
+          {% endif %}
+
+        </ul>
+    
+    </main>
+
+                {%if msg%}
+                    <div class="col-12 mt-4 text-center">
+                        <div class="alert {{ class }}">
+                            {{msg}}
+                        </div>
+                    </div>
+                {%endif%}
+
+
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+      <p style="color:Black;" class="mb-1">&copy; 2022 Criado por  Hiago Souza com Python, Django e Bootstrap</p>
+      
+    </footer>
+  </div>
+
+
+{% endblock content %}
+

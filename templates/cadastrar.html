@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+<!--  Bloco do titulo da página-->
+{% block title %}
+Cadastro
+{% endblock title %}
+
+<!--  Bloco do Conteúdo da página-->
+
+
+{% block content %} 
+
+<body>
+    
+    <div class="container" >
+        
+
+        <main class=" w-100 m-auto text-center">
+            <form method="post" action="?">
+              {% csrf_token %}
+
+              
+
+              <div class="mb-6"></dvi>
+              <h3 style="color:black;" class="h1 mb-3 fw-normal">Cadastrar usuário</h3>
+          
+              <div class="form-floating col-12 ">
+                {{form.as_p}}
+              </div>
+
+               {%if msg%}
+                <div class="col-12 mt-4 text-center">
+                    <div class="alert {{ class }}">
+                        {{msg}}
+                    </div>
+                </div>
+                {%endif%}
+
+
+             
+              <button class="btn btn-primary mb-2" type="submit">Salvar</button>
+              <input type="reset" class="btn btn-secondary mb-2" value="Menu" onclick="location.href='{% url 'desafio_tech:homepage' %}'">
+             
+            </form>
+        </main>
+      
+        <footer class="my-5 pt-5 text-muted text-center text-small">
+          <p style="color:black;" class="mb-1">&copy; 2022 Criado por  Hiago Souza com Python, Django e Bootstrap</p>
+          
+        </footer>
+    </div>
+
+
+<body>
+
+{% endblock content %} 
+
